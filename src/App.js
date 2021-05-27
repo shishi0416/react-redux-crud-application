@@ -1,67 +1,34 @@
-import React from 'react';
-// import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
+const App = () => (<Counter></Counter>)
 
-// class App extends Component {
-//   render() {
-//     // const greeting = "Hi!!"
-//     // const dom = <h1 className="foo">{greeting}</h1> ;
-//     // return dom;
-//     // return <h1>Hello. world</h1>
+class Counter extends Component {
+  constructor(props){
+    super(props)
+    this.state = {count: 0}
+  }
 
-//     // return <input type="text" onClick={() => {console.log("I am Tom")}}    />
+  handlePlusButton = () => {
+    console.log(this.state.count)
+    this.setState({count: this.state.count + 1 })
+  }
 
-//     // return <input type="text" onChange={() => {console.log("I am Change")}}    />
-
-//     return(
-//       <React.Fragment>
-//         <label htmlFor="bar">
-//           bar
-//         </label>
-//         <input type="text" onChange={() => {console.log("I am Change")}}    />
-//       </React.Fragment>
-//     )
-//   }
-// }
-
-// functional component
-const App = () => {
-  const profiles = [
-    { name: "Taro", age: 10 },
-    { name: "Hanako", age: 14 },
-    { name: "JIRO" }
-  ]
-
-  return(
-    <div>
-    {
-      profiles.map((profile, index) => {
-        return <User name={profile.name} age={profile.age} key={index}/>
-      })
+  handleMinusButton = () => {
+    console.log(this.state.count)
+    if (this.state.count > 0){
+      this.setState({count: this.state.count - 1 })
     }
-    </div>
-    // <div>
-    //   <User name={"Taro"} age={10} />
-    //   <User name={"Hanako"} age={30} />
-    // </div>
-  )
-}
+  }
 
-const User = (props) => {
-  return <div>Hi,I am {props.name}, and {props.age} years old</div>
-}
-
-//型チェック
-User.propTypes = {
-  name: PropTypes.string,
-  age: PropTypes.number.isRequired
-}
-
-//デフォルト値
-User.defaultProps = {
-  age: 1
-
+  render() {
+    return (
+      <React.Fragment>
+        <div>count: {this.state.count}</div>
+        <button onClick={this.handlePlusButton}>+1</button>
+        <button onClick={this.handleMinusButton}>-1</button>
+      </React.Fragment>
+    )
+  } 
 }
 
 export default App;
